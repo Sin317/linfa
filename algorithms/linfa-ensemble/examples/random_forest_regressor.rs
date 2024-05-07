@@ -1,14 +1,13 @@
-use linfa_datasets::{iris, diabetes};
+use linfa_datasets::{diabetes, iris};
+use linfa_ensemble::visualization;
 use linfa_ensemble::RandomForestRegressor;
 use ndarray::{Array1, Array2, Axis}; // For floating-point assertions
-use linfa_ensemble::visualization;
 
 fn calculate_rmse(actual: &Array1<f64>, predicted: &Array1<f64>) -> f64 {
     let errors = actual - predicted;
     let mse = errors.mapv(|e| e.powi(2)).mean().unwrap();
     mse.sqrt()
 }
-
 
 fn load_iris_data() -> (Array2<f64>, Array1<f64>) {
     // Load the dataset
@@ -59,7 +58,8 @@ fn test_random_forest_with_diabetes() {
         &test_targets.to_owned(),
         &test_predictions,
         "diabetes_rf_scatter.png",
-    ).unwrap();
+    )
+    .unwrap();
 }
 
 fn test_random_forest_with_iris() {
@@ -68,7 +68,6 @@ fn test_random_forest_with_iris() {
     let mut forest = RandomForestRegressor::new(100, 3, 10);
     forest.fit(&features, &targets);
     let predictions = forest.predict(&features);
-
 
     // Define a tolerance level
     let tolerance = 0.1; // Tolerance level for correct classification
@@ -95,7 +94,6 @@ fn test_random_forest_with_iris() {
 
     println!("Test RMSE for Iris Dataset: {:?}", rmse);
 }
-
 
 fn main() {
     test_random_forest_with_iris();
