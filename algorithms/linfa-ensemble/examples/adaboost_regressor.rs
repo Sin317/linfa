@@ -1,9 +1,3 @@
-use ndarray::{Array2, Array1, s};
-use ndarray_csv::Array2Reader;
-use std::fs::File;
-use rand::rngs::StdRng;
-use rand::SeedableRng;
-use csv::ReaderBuilder;
 use linfa_ensemble::AdaBoostRegressor;
 use linfa_datasets::{boston, diabetes};
 

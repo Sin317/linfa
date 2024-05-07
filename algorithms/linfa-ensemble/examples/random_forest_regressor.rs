@@ -1,4 +1,3 @@
-use approx::assert_relative_eq;
 use linfa_datasets::{iris, diabetes};
 use linfa_ensemble::RandomForestRegressor;
 use ndarray::{Array1, Array2, Axis}; // For floating-point assertions
@@ -41,7 +40,7 @@ fn test_random_forest_with_diabetes() {
     let (train_features, test_features) = features.view().split_at(Axis(0), split_index);
     let (train_targets, test_targets) = targets.view().split_at(Axis(0), split_index);
 
-    let mut forest = RandomForestRegressor::new(150, 10, 5, 10);
+    let mut forest = RandomForestRegressor::new(150, 5, 10);
     forest.fit(&train_features.to_owned(), &train_targets.to_owned());
     let train_predictions = forest.predict(&train_features.to_owned());
     let test_predictions = forest.predict(&test_features.to_owned());
@@ -66,7 +65,7 @@ fn test_random_forest_with_diabetes() {
 fn test_random_forest_with_iris() {
     let (features, targets) = load_iris_data();
 
-    let mut forest = RandomForestRegressor::new(100, 10, 3, 10);
+    let mut forest = RandomForestRegressor::new(100, 3, 10);
     forest.fit(&features, &targets);
     let predictions = forest.predict(&features);
 
