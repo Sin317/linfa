@@ -52,4 +52,6 @@ mod tests {
         println!("RMSE: {:?}", rmse);
     }
 }
-fn main() {}
+fn main() {
+    // Run the tests
+}
